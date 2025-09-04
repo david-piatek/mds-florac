@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NEWS{% endblock %}
+
+{% block body %}
+    <h1>NEWS</h1>
+    <div class="example-wrapper">
+        <div class="row">
+            {% for new in news %}
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ new.title }}</h5>
+                            <p class="card-text">{{ new.description  | raw }} </p>
+                            <img class="card-img-top" src="{{ asset('asset/image/' ~ new.imagePath) }}" alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

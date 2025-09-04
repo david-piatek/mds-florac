@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LE CABINET{% endblock %}
+
+{% block body %}
+    <h1>LE CABINET</h1>
+    <div class="example-wrapper">
+        <div class="row">
+            <h2>histoire</h2>
+            <div class="col-6">
+                <img class="img-fluid" src="{{ asset('asset/image/' ~ office.imagePath) }}" alt="Card image cap">
+            </div>
+            <div class="col-6">{{ office.history | raw}}</div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage!{% endblock %}
+
+{% block body %}
+    <h1>Homepage</h1>
+
+
+        <div class="row">
+            <h2>histoire</h2>
+            <div class="col-6">
+                <img class="img-fluid" src="{{ asset('asset/image/' ~ office.imagePath) }}" alt="Card image cap">
+            </div>
+            <div class="col-6">{{ office.history | raw }}</div>
+            <div class="col-6">{{ office.description | raw }}</div>
+        </div>
+    <hr/>
+
+        <div class="row" style="margin-top: 20px">
+            {% for professional in medicalProfessionals %}
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ professional.firstName }}</h5>
+                            <p class="card-text">{{ professional.description | raw }} </p>
+                            <img class="card-img-top" src="{{ asset('asset/image/' ~ professional.imagePath) }}" alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    <hr/>
+
+    <div class="row">
+        <h2>Lozère</h2>
+        <div class="col-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</div>
+        <div class="col-6">
+            <img class="img-fluid" src="https://picsum.photos/id/231/500/300" alt="Card image cap">
+        </div>
+    </div>
+    <hr/>
+
+    <div class="row" style="margin-top: 20px">
+        {% for new in news %}
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ new.title }}</h5>
+                        <p class="card-text">{{ new.description | raw  }} </p>
+                        <img class="card-img-top" src="{{ asset('asset/image/' ~ new.imagePath) }}" alt="Card image cap">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+{% endblock %}

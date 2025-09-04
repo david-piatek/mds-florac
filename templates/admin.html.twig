@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+            <link rel="stylesheet" type="text/css" href="https://unpkg.com/pell/dist/pell.min.css">
+            <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        {% endblock %}
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path(name = 'admin_office') }}">Le cabinet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path(name = 'admin_medical_professional') }}">Les praticiens</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path(name = 'admin_news') }}">Acutualités</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('homepage', {'isPreview': 'true'}) }}">Preview</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+        {% block body %}{% endblock %}
+    <script src="https://unpkg.com/pell"></script>
+    <script>
+        function resizeIframe(iframe) {
+            try {
+                // Ajuste la hauteur à la taille du contenu
+                iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+            } catch (e) {
+                console.warn('Impossible de redimensionner l’iframe :', e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const textareas = document.getElementsByClassName('pell-target');
+
+            for (let i = 0; i < textareas.length; i++) {
+                const textarea = textareas[i];
+
+                const wrapper = document.createElement('div');
+                wrapper.classList.add('pell-wrapper');
+                textarea.style.display = 'none'; // Cache le textarea
+                textarea.parentNode.insertBefore(wrapper, textarea);
+
+                pell.init({
+                    element: wrapper,
+                    onChange: html => {
+                        textarea.value = html; // met à jour le textarea pour Symfony
+                    }
+                });
+
+                // initialise le contenu
+                wrapper.querySelector('.pell-content').innerHTML = textarea.value;
+            }
+        });
+    </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Pro{% endblock %}
+
+{% block body %}
+    <h1>medicalProfessionals</h1>
+    <div class="example-wrapper">
+        {{ form_start(form) }}
+        <div class="row">
+            {% for medicalProfessionals in form.medicalProfessionals %}
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            {{ form_errors(medicalProfessionals) }}
+                            {{ form_widget(medicalProfessionals) }}
+                            <img class="card-img-top"
+                                 src="{{ asset('asset/image/' ~ medicalProfessionals.vars.data.imagePath) }}"
+                                 alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {{ form_end(form) }}
+
+
+
+        <iframe src="{{ path('medical_professional') }}"
+                width="100%"
+                style="min-height: 200px; overflow: hidden;"
+                onload="resizeIframe(this)">
+
+        </iframe>
+        <br>
+        <br>
+        <br>
+        <hr>
+        <button type="button" class="btn btn-danger">Valider preview</button>
+
+        <hr>
+
+    </div>
+
+
+{% endblock %}

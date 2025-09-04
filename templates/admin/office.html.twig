@@ -1,0 +1,35 @@
+{% extends 'admin.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .pell-content {
+            background-color: lightyellow;
+        }
+    </style>
+{% endblock %}
+{% block title %}LE CABINET{% endblock %}
+
+{% block body %}
+    <h1>LE CABINET</h1>
+    <div class="example-wrapper">
+        <div class="row">
+            {{ form(form) }}
+        </div>
+
+
+        <iframe src="{{ path('office') }}"
+                width="100%"
+                style="min-height: 200px; overflow: hidden;"
+                onload="resizeIframe(this)">
+
+        </iframe>
+        <br>
+        <br>
+        <br>
+        <hr>
+        <button type="button" class="btn btn-danger">Valider preview</button>
+
+        <hr>
+    </div>
+
+{% endblock %}

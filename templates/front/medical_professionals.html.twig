@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pro{% endblock %}
+
+{% block body %}
+    <h1>medicalProfessionals</h1>
+    <div class="example-wrapper">
+        <div class="row">
+            {% for professional in medicalProfessionals %}
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ professional.firstName }} {{ professional.lastName }}</h5>
+                            <p class="card-text">{{ professional.description  | raw }} </p>
+                            <p class="card-text">{{ professional.job }} </p>
+                            <p class="card-text">{{ professional.placePosition }} </p>
+                            <a href="#" class="btn btn-primary">Rendez-vous</a>
+                            <img class="card-img-top" src="{{ asset('asset/image/' ~ professional.imagePath) }}" alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
